@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var restart_button := $CanvasLayer/Button
+@onready var restart_button: Button = $Interfaz/Button
 
 func _ready():
 	restart_button.visible = false  # Oculta el botón al comenzar

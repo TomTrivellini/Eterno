@@ -10,8 +10,8 @@ signal part_disabled(part: String)
 	"legs": 5,
 }
 const MAX_LIMB_HEALTH = 5
-# Estado actual (si están inhabilitados)
 
+# Estado actual (si están inhabilitados)
 var disabled_limbs = {
 	"head": false,
 	"torso": false,
