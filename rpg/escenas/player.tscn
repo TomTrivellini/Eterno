@@ -1,0 +1,81 @@
+[gd_scene load_steps=13 format=3 uid="uid://dy1gcnkqcx1ny"]
+
+[ext_resource type="Texture2D" uid="uid://douudikyt6cxj" path="res://assets/Players/No Outlines/players blue x1.png" id="1_esbpa"]
+[ext_resource type="Script" uid="uid://be2cdlfnb8a3b" path="res://codigo/player.gd" id="1_kkt6c"]
+[ext_resource type="PackedScene" uid="uid://cicp46figdxue" path="res://escenas/componentes/movimiento.tscn" id="2_6nxto"]
+[ext_resource type="PackedScene" uid="uid://cye5sb5m0483g" path="res://escenas/arma.tscn" id="3_j7xnp"]
+[ext_resource type="PackedScene" uid="uid://dvjuexqohhhvq" path="res://escenas/componentes/vida.tscn" id="5_t3yu4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkt6c"]
+atlas = ExtResource("1_esbpa")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7xnp"]
+atlas = ExtResource("1_esbpa")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4kro"]
+atlas = ExtResource("1_esbpa")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nxto"]
+atlas = ExtResource("1_esbpa")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3yu4"]
+atlas = ExtResource("1_esbpa")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_r4hsq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkt6c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7xnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4kro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nxto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3yu4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sacnx"]
+radius = 4.0
+height = 12.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 5
+script = ExtResource("1_kkt6c")
+
+[node name="Movimiento" parent="." instance=ExtResource("2_6nxto")]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_r4hsq")
+animation = &"idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("CapsuleShape2D_sacnx")
+
+[node name="Arma" parent="." instance=ExtResource("3_j7xnp")]
+position = Vector2(-1, -6)
+is_player = true
+
+[node name="Vida" parent="." groups=["player"] instance=ExtResource("5_t3yu4")]

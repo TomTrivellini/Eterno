@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://dv4kix24xqsv6"]
+
+[node name="Inventario" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+texture_filter = 1
+layout_mode = 0
+offset_right = 4.0
+offset_bottom = 27.0
+scale = Vector2(0.679999, 0.68)
+
+[node name="Dado" type="Label" parent="."]
+layout_mode = 0
+offset_left = 39.0
+offset_top = -1.00002
+offset_right = 79.0
+offset_bottom = 22.0
+scale = Vector2(1.1115, 1.19378)
+text = "1"

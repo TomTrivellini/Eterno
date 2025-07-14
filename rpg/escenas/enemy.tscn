@@ -1,0 +1,95 @@
+[gd_scene load_steps=14 format=3 uid="uid://duhj385sj4nqw"]
+
+[ext_resource type="Script" uid="uid://b6ricujubn0xq" path="res://codigo/enemy.gd" id="1_vs78y"]
+[ext_resource type="Texture2D" uid="uid://douudikyt6cxj" path="res://assets/Players/No Outlines/players blue x1.png" id="2_xmj2q"]
+[ext_resource type="Script" uid="uid://bg7g6gc5r7d0s" path="res://escenas/componentes/vida.gd" id="3_xmj2q"]
+[ext_resource type="PackedScene" uid="uid://cicp46figdxue" path="res://escenas/componentes/movimiento.tscn" id="4_ocnky"]
+[ext_resource type="PackedScene" uid="uid://cye5sb5m0483g" path="res://escenas/arma.tscn" id="5_tod1u"]
+[ext_resource type="PackedScene" uid="uid://ddh8iya02p4xl" path="res://escenas/maquina_estado.tscn" id="6_jx5fs"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kkt6c"]
+atlas = ExtResource("2_xmj2q")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j7xnp"]
+atlas = ExtResource("2_xmj2q")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k4kro"]
+atlas = ExtResource("2_xmj2q")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nxto"]
+atlas = ExtResource("2_xmj2q")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t3yu4"]
+atlas = ExtResource("2_xmj2q")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ocnky"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kkt6c")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j7xnp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k4kro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nxto")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t3yu4")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_tod1u"]
+radius = 5.0
+height = 12.0
+
+[node name="Enemy" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_vs78y")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0, -14)
+sprite_frames = SubResource("SpriteFrames_ocnky")
+animation = &"walk"
+frame = 3
+frame_progress = 0.295446
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+scale = Vector2(1.13366, 1.4)
+shape = SubResource("CapsuleShape2D_tod1u")
+
+[node name="Vision" type="Node2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="Vision"]
+position = Vector2(1, -10)
+target_position = Vector2(49, 0)
+collision_mask = 5
+
+[node name="Vida" type="Node2D" parent="."]
+script = ExtResource("3_xmj2q")
+
+[node name="Movimiento" parent="." instance=ExtResource("4_ocnky")]
+
+[node name="Arma" parent="." instance=ExtResource("5_tod1u")]
+position = Vector2(0, -6)
+
+[node name="MaquinaEstado" parent="." instance=ExtResource("6_jx5fs")]

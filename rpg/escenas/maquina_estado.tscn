@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ddh8iya02p4xl"]
+
+[ext_resource type="Script" uid="uid://p43p758effqr" path="res://escenas/componentes/maquina_estado.gd" id="1_k5236"]
+
+[node name="MaquinaEstado" type="Node"]
+script = ExtResource("1_k5236")

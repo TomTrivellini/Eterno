@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://bi6ajy1nv3jil"]
+
+[ext_resource type="Texture2D" uid="uid://ci46juyl6e1gd" path="res://assets/armas/01 - Individual sprites/Bullets & Ammo/Revolver - Colt 45/Bullet.png" id="1_1dqwh"]
+[ext_resource type="Script" uid="uid://nn5cv4me3lsn" path="res://codigo/bullet.gd" id="1_blkrf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_blkrf"]
+size = Vector2(2, 2)
+
+[node name="Area2D" type="Area2D"]
+collision_layer = 7
+collision_mask = 6
+script = ExtResource("1_blkrf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_1dqwh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_blkrf")
+
+[connection signal="area_shape_entered" from="." to="." method="_on_area_shape_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

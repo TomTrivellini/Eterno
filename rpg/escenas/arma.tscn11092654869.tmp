@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://cye5sb5m0483g"]
+
+[ext_resource type="Script" uid="uid://br54esjlucyd5" path="res://codigo/arma.gd" id="1_t1awj"]
+[ext_resource type="Texture2D" uid="uid://do61t8agnjror" path="res://assets/armas/02 - Sprite sheets/Revolver - Colt 45 [64x32]/[SHOOT WITH MUZZLE FLASH] Revolver - Colt 45.png" id="2_t1awj"]
+
+[sub_resource type="Animation" id="Animation_t1awj"]
+resource_name = "shoot"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.166767, 0.166867, 0.2, 0.233333, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 2, 3, 4, 5, 6, 0, 0, 7, 8, 9]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.166667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"spawn_bullet"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_t1m4a"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_50orj"]
+_data = {
+&"RESET": SubResource("Animation_t1m4a"),
+&"shoot": SubResource("Animation_t1awj")
+}
+
+[node name="Arma" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_t1awj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, -1)
+scale = Vector2(0.226563, 0.25)
+texture = ExtResource("2_t1awj")
+hframes = 10
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_50orj")
+}
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(6, -2)
+
+[connection signal="animation_finished" from="Sprite2D/AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
